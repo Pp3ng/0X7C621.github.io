@@ -66,7 +66,6 @@
             border-radius: 15px;
             animation: fadeIn 3s ease-in-out;
             transition: transform 0.3s;
-            cursor: pointer;
         }
 
         img:hover {
@@ -95,163 +94,82 @@
             animation: fadeIn 3s ease-in-out;
         }
 
-        /* Lightbox styles */
-        .lightbox {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            justify-content: center;
-            align-items: center;
-            z-index: 1000;
-        }
-
-        .lightbox img {
-            max-width: 90%;
-            max-height: 90%;
-        }
-
-        /* Animation Keyframes */
-        @keyframes fadeIn {
-            0% {
-                opacity: 0;
-            }
-
-            100% {
-                opacity: 1;
-            }
-        }
-
-        @keyframes bounce {
-            0%,
-            20%,
-            50%,
-            80%,
-            100% {
-                transform: translateY(0);
-            }
-
-            40% {
-                transform: translateY(-20px);
-            }
-
-            60% {
-                transform: translateY(-10px);
-            }
-        }
-
-        @keyframes slideIn {
-            0% {
-                transform: translateY(50px);
-                opacity: 0;
-            }
-
-            100% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-        }
-
-        /* Nyan Cat styles */
         .nyan-cat {
-            position: fixed;
+            position: absolute;
             width: 150px;
+            height: auto;
             z-index: 1001;
         }
     </style>
 </head>
 
 <body>
-<div class="container">
-    <h1>Welcome to ZLP & NJR's Album! 😻</h1>
-    <h2>A place to capture our moments together 💖🐾</h2>
+    <div class="container">
+        <h1>Welcome to ZLP & NJR's Album! 😻</h1>
+        <h2>A place to capture our moments together 💖🐾</h2>
 
-    <div class="album-entry">
-        <h2>First Memory</h2>
-        <p>The first time ever I saw your face, I saw the sun rise in your eyes, and the moon and stars were the
-            gift
-            you gave to the dark and empty skies.</p>
-        <img src="SHY.jpg" alt="A beautiful memory" class="lightbox-trigger">
-    </div>
-
-    <div class="album-entry">
-        <h2>HONG KONG journey</h2>
-        <img src="Teeth.jpg" alt="A beautiful view of Hong Kong" class="lightbox-trigger">
-        <img src="eye.jpg" alt="An eye-catching sight" class="lightbox-trigger">
-    </div>
-
-    <div class="album-entry">
-        <h2>Liao Ning journey</h2>
-        <img src="NOISE.jpg" alt="Vibrant moments in Liao Ning" class="lightbox-trigger">
-        <img src="SEABRI.jpg" alt="A serene sea view" class="lightbox-trigger">
-    </div>
-
-    <div class="album-entry">
-        <h2>Seoul journey</h2>
-        <img src="in_seoul.jpg" alt="Exploring Seoul" class="lightbox-trigger">
-        <img src="NJR.jpg" alt="A special memory" class="lightbox-trigger">
-
-        <!-- Nyan Cat Animation -->
-        <img src="nyancat.gif" alt="Nyan Cat" class="nyan-cat" id="nyanCat">
-
-        <div class="lightbox" id="lightbox">
-            <img id="lightbox-img" src="" alt="Lightbox image">
+        <div class="album-entry">
+            <h2>First Memory</h2>
+            <p>The first time ever I saw your face, I saw the sun rise in your eyes, and the moon and stars were the
+                gift
+                you gave to the dark and empty skies.</p>
+            <img src="SHY.jpg" alt="A beautiful memory">
         </div>
+
+        <div class="album-entry">
+            <h2>HONG KONG journey</h2>
+            <img src="Teeth.jpg" alt="A beautiful view of Hong Kong">
+            <img src="eye.jpg" alt="An eye-catching sight">
+        </div>
+
+        <div class="album-entry">
+            <h2>Liao Ning journey</h2>
+            <img src="NOISE.jpg" alt="Vibrant moments in Liao Ning">
+            <img src="SEABRI.jpg" alt="A serene sea view">
+        </div>
+
+        <div class="album-entry">
+            <h2>Seoul journey</h2>
+            <img src="in_seoul.jpg" alt="Exploring Seoul">
+            <img src="NJR.jpg" alt="A special memory">
+
+            <!-- Nyan Cat Animation -->
+            <img src="nyancat.gif" alt="Nyan Cat" class="nyan-cat" id="nyanCat">
+        </div>
+
+        <footer>&copy; 2024 ZLP & NJR's Album. All rights reserved. 🌷</footer>
     </div>
 
-    <footer>&copy; 2024 ZLP & NJR's Album. All rights reserved. 🌷</footer>
-</div>
-<script>
-    // Lightbox functionality
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImg = document.getElementById('lightbox-img');
+    <script>
+        // Nyan Cat movement and collision detection
+        const nyanCat = document.getElementById('nyanCat');
+        let dx = 1.5; // Change in x
+        let dy = 1.5; // Change in y
+        let catX = Math.random() * (window.innerWidth - 150); // Random initial x position
+        let catY = Math.random() * (window.innerHeight - 150); // Random initial y position
 
-    // Get all images with class 'lightbox-trigger'
-    const images = document.querySelectorAll('.lightbox-trigger');
-    images.forEach(image => {
-        image.addEventListener('click', () => {
-            lightboxImg.src = image.src; // Set the lightbox image source to the clicked image
-            lightbox.style.display = 'flex'; // Show the lightbox
-        });
-    });
+        function updateNyanCatPosition() {
+            catX += dx;
+            catY += dy;
 
-    // Close the lightbox when clicking outside the image
-    lightbox.addEventListener('click', () => {
-        lightbox.style.display = 'none'; // Hide the lightbox
-    });
+            // Check for collision with window boundaries
+            if (catX + 150 > window.innerWidth || catX < 0) {
+                dx *= -1; // Reverse direction on x-axis
+            }
+            if (catY + 150 > window.innerHeight || catY < 0) {
+                dy *= -1; // Reverse direction on y-axis
+            }
 
-    // Nyan Cat movement and collision detection
-    const nyanCat = document.getElementById('nyanCat');
-    let dx = 1.5; // Change in x
-    let dy = 1.5; // Change in y
-    let catX = Math.random() * (window.innerWidth - 150); // Random initial x position
-    let catY = Math.random() * (window.innerHeight - 150); // Random initial y position
+            // Update Nyan Cat position
+            nyanCat.style.left = `${catX}px`;
+            nyanCat.style.top = `${catY}px`;
 
-    function updateNyanCatPosition() {
-        catX += dx;
-        catY += dy;
-
-        // Check for collision with window boundaries
-        if (catX + 150 > window.innerWidth || catX < 0) {
-            dx *= -1; // Reverse direction on x-axis
-        }
-        if (catY + 150 > window.innerHeight || catY < 0) {
-            dy *= -1; // Reverse direction on y-axis
+            requestAnimationFrame(updateNyanCatPosition);
         }
 
-        // Update Nyan Cat position
-        nyanCat.style.left = `${catX}px`;
-        nyanCat.style.top = `${catY}px`;
-
-        requestAnimationFrame(updateNyanCatPosition);
-    }
-
-    // Start the Nyan Cat movement
-    updateNyanCatPosition();
-</script>
+        // Start the Nyan Cat movement
+        updateNyanCatPosition();
+    </script>
 </body>
 
 </html>
