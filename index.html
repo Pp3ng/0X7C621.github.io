@@ -95,81 +95,153 @@
         }
 
         .nyan-cat {
-            position: absolute;
+            position: fixed;
             width: 150px;
             height: auto;
             z-index: 1001;
+            transition: opacity 0.5s ease-in-out;
+        }
+
+        @keyframes rotate {
+            from {
+                transform: rotate(0deg);
+            }
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        .rotating {
+            animation: rotate 2s linear infinite;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-10px);
+            }
         }
     </style>
 </head>
 
 <body>
-    <div class="container">
-        <h1>Welcome to ZLP & NJR's Album! 😻</h1>
-        <h2>A place to capture our moments together 💖🐾</h2>
+<div class="container">
+    <h1>Welcome to ZLP & NJR's Album! 😻</h1>
+    <h2>A place to capture our moments together 💖🐾</h2>
 
-        <div class="album-entry">
-            <h2>First Memory</h2>
-            <p>The first time ever I saw your face, I saw the sun rise in your eyes, and the moon and stars were the
-                gift
-                you gave to the dark and empty skies.</p>
-            <img src="SHY.jpg" alt="A beautiful memory">
-        </div>
-
-        <div class="album-entry">
-            <h2>HONG KONG journey</h2>
-            <img src="Teeth.jpg" alt="A beautiful view of Hong Kong">
-            <img src="eye.jpg" alt="An eye-catching sight">
-        </div>
-
-        <div class="album-entry">
-            <h2>Liao Ning journey</h2>
-            <img src="NOISE.jpg" alt="Vibrant moments in Liao Ning">
-            <img src="SEABRI.jpg" alt="A serene sea view">
-        </div>
-
-        <div class="album-entry">
-            <h2>Seoul journey</h2>
-            <img src="in_seoul.jpg" alt="Exploring Seoul">
-            <img src="NJR.jpg" alt="A special memory">
-
-            <!-- Nyan Cat Animation -->
-            <img src="nyancat.gif" alt="Nyan Cat" class="nyan-cat" id="nyanCat">
-        </div>
-
-        <footer>&copy; 2024 ZLP & NJR's Album. All rights reserved. 🌷</footer>
+    <div class="album-entry">
+        <h2>First Memory</h2>
+        <p>The first time ever I saw your face, I saw the sun rise in your eyes, and the moon and stars were the
+            gift
+            you gave to the dark and empty skies.</p>
+        <img src="SHY.jpg" alt="A beautiful memory">
     </div>
 
-    <script>
-        // Nyan Cat movement and collision detection
-        const nyanCat = document.getElementById('nyanCat');
-        let dx = 1.5; // Change in x
-        let dy = 1.5; // Change in y
-        let catX = Math.random() * (window.innerWidth - 150); // Random initial x position
-        let catY = Math.random() * (window.innerHeight - 150); // Random initial y position
+    <div class="album-entry">
+        <h2>HONG KONG journey</h2>
+        <img src="Teeth.jpg" alt="A beautiful view of Hong Kong">
+        <img src="eye.jpg" alt="An eye-catching sight">
+    </div>
 
-        function updateNyanCatPosition() {
-            catX += dx;
-            catY += dy;
+    <div class="album-entry">
+        <h2>Liao Ning journey</h2>
+        <img src="NOISE.jpg" alt="Vibrant moments in Liao Ning">
+        <img src="SEABRI.jpg" alt="A serene sea view">
+    </div>
 
-            // Check for collision with window boundaries
-            if (catX + 150 > window.innerWidth || catX < 0) {
-                dx *= -1; // Reverse direction on x-axis
-            }
-            if (catY + 150 > window.innerHeight || catY < 0) {
-                dy *= -1; // Reverse direction on y-axis
-            }
+    <div class="album-entry">
+        <h2>Seoul journey</h2>
+        <img src="in_seoul.jpg" alt="Exploring Seoul">
+        <img src="NJR.jpg" alt="A special memory">
+    </div>
 
-            // Update Nyan Cat position
-            nyanCat.style.left = `${catX}px`;
-            nyanCat.style.top = `${catY}px`;
+    <footer>&copy; 2024 ZLP & NJR's Album. All rights reserved. 🌷</footer>
+</div>
 
-            requestAnimationFrame(updateNyanCatPosition);
+<!-- Nyan Cat Animation -->
+<img src="nyancat.gif" alt="Nyan Cat" class="nyan-cat" id="nyanCat">
+
+<script>
+    // Nyan Cat movement and collision detection
+    const nyanCat = document.getElementById('nyanCat');
+    let dx = 2; // Change in x
+    let dy = 2; // Change in y
+    let catX = Math.random() * (window.innerWidth - 150); // Random initial x position
+    let catY = Math.random() * (window.innerHeight - 150); // Random initial y position
+
+    function updateNyanCatPosition() {
+        catX += dx;
+        catY += dy;
+
+        // Check for collision with window boundaries
+        if (catX + 150 > window.innerWidth || catX < 0) {
+            dx *= -1; // Reverse direction on x-axis
+        }
+        if (catY + 150 > window.innerHeight || catY < 0) {
+            dy *= -1; // Reverse direction on y-axis
         }
 
-        // Start the Nyan Cat movement
-        updateNyanCatPosition();
-    </script>
+        // Update Nyan Cat position
+        nyanCat.style.left = `${catX}px`;
+        nyanCat.style.top = `${catY}px`;
+
+        requestAnimationFrame(updateNyanCatPosition);
+    }
+
+    // Start the Nyan Cat movement
+    updateNyanCatPosition();
+
+    // Toggle rotation on click
+    let isRotating = false;
+    nyanCat.addEventListener('click', function () {
+        isRotating = !isRotating;
+        if (isRotating) {
+            this.classList.add('rotating');
+        } else {
+            this.classList.remove('rotating');
+        }
+    });
+
+    // Responsive design for album entries
+    const albumEntries = document.querySelectorAll('.album-entry');
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }
+        });
+    }, {threshold: 0.1});
+
+    albumEntries.forEach(entry => {
+        entry.style.opacity = '0';
+        entry.style.transform = 'translateY(50px)';
+        entry.style.transition = 'opacity 0.5s, transform 0.5s';
+        observer.observe(entry);
+    });
+</script>
 </body>
 
 </html>
