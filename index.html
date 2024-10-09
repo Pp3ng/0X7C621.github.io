@@ -143,6 +143,28 @@
                 transform: translateY(-10px);
             }
         }
+
+        /* New styles for the love timer */
+        .love-timer {
+            background-color: #fff;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .love-timer:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .timer {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: #ff6b6b;
+            margin-top: 10px;
+        }
     </style>
 </head>
 
@@ -150,6 +172,12 @@
 <div class="container">
     <h1>Welcome to ZLP & NJR's Album! 😻</h1>
     <h2>A place to capture our moments together 💖🐾</h2>
+
+    <!-- New love timer section -->
+    <div class="love-timer">
+        <h2>Our Love Timer</h2>
+        <div id="timer" class="timer"></div>
+    </div>
 
     <div class="album-entry">
         <h2>First Memory</h2>
@@ -241,6 +269,25 @@
         entry.style.transition = 'opacity 0.5s, transform 0.5s';
         observer.observe(entry);
     });
+
+    // New love timer function
+    function updateLoveTimer() {
+        const startDate = new Date('2024-06-21T01:30:00');
+        const now = new Date();
+        const difference = now.getTime() - startDate.getTime();
+
+        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+        document.getElementById('timer').textContent =
+            `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+    }
+
+    // Update the timer every second
+    setInterval(updateLoveTimer, 1000);
+    updateLoveTimer(); // Initial call to display the timer immediately
 </script>
 </body>
 
