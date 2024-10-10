@@ -7,6 +7,7 @@
     <title>ZLP & NJR's Album</title>
     <link rel="icon" href='cow.png' type="image/x-icon">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <style>
         :root {
             --primary-color: #ff6b6b;
@@ -69,7 +70,7 @@
         }
 
         img:hover {
-            transform: scale(1.1);
+            transform: scale(1.05);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
         }
 
@@ -144,7 +145,6 @@
             }
         }
 
-        /* New styles for the love timer */
         .love-timer {
             background-color: #fff;
             padding: 20px;
@@ -165,15 +165,72 @@
             color: #ff6b6b;
             margin-top: 10px;
         }
+
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            margin-bottom: 20px;
+        }
+
+        .image-gallery img {
+            width: 400px;
+            height: 500px;
+            object-fit: cover;
+        }
+
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            color: #ff6b6b;
+            opacity: 0;
+            animation: floatHeart 4s ease-in-out;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
+        }
+
+        .memory-quote {
+            font-style: italic;
+            color: #666;
+            margin: 10px 0;
+        }
+
+        .journey-map {
+            width: 100%;
+            height: 200px;
+            border: none;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        #confetti-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1000;
+        }
     </style>
 </head>
 
 <body>
+<canvas id="confetti-canvas"></canvas>
 <div class="container">
     <h1>Welcome to ZLP & NJR's Album! 😻</h1>
     <h2>A place to capture our moments together 💖🐾</h2>
 
-    <!-- New love timer section -->
     <div class="love-timer">
         <h2>Our Love Timer</h2>
         <div id="timer" class="timer"></div>
@@ -182,95 +239,100 @@
     <div class="album-entry">
         <h2>First Memory</h2>
         <p>The first time ever I saw your face, I saw the sun rise in your eyes, and the moon and stars were the
-            gift
-            you gave to the dark and empty skies.</p>
+            gift you gave to the dark and empty skies.</p>
         <img src="SHY.jpg" alt="A beautiful memory">
+        <p class="memory-quote">"Love at first sight is easy to understand; it's when two people have been looking at
+            each other for a lifetime that it becomes a miracle." - Sam Levenson</p>
     </div>
 
     <div class="album-entry">
         <h2>HONG KONG journey</h2>
-        <img src="Teeth.jpg" alt="A beautiful view of Hong Kong">
-        <img src="eye.jpg" alt="An eye-catching sight">
+        <div class="image-gallery">
+            <img src="Teeth.jpg" alt="A beautiful view of Hong Kong">
+            <img src="eye.jpg" alt="An eye-catching sight">
+        </div>
+        <p class="memory-quote">"We travel not to escape life, but for life not to escape us." - Anonymous</p>
+        <iframe class="journey-map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d236161.91654014084!2d114.0084042151371!3d22.35573121670782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403e2eda332980f%3A0xf08ab3badbeac97c!2sHong%20Kong!5e0!3m2!1sen!2s!4v1625308876452!5m2!1sen!2s"
+                allowfullscreen="" loading="lazy"></iframe>
     </div>
 
     <div class="album-entry">
         <h2>Liao Ning journey</h2>
-        <img src="NOISE.jpg" alt="Vibrant moments in Liao Ning">
-        <img src="SEABRI.jpg" alt="A serene sea view">
+        <div class="image-gallery">
+            <img src="NOISE.jpg" alt="Vibrant moments in Liao Ning">
+            <img src="SEABRI.jpg" alt="A serene sea view">
+        </div>
+        <p class="memory-quote">"The world is a book and those who do not travel read only one page." - St.
+            Augustine</p>
+        <iframe class="journey-map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5921373.996708418!2d118.27080754775716!3d41.29426075258454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35e8d0d7e1a1c1b1%3A0x5e3b4e7f0c064f2c!2sLiaoning%2C%20China!5e0!3m2!1sen!2s!4v1625308987654!5m2!1sen!2s"
+                allowfullscreen="" loading="lazy"></iframe>
     </div>
 
     <div class="album-entry">
         <h2>Seoul journey</h2>
-        <img src="in_seoul.jpg" alt="Exploring Seoul">
-        <img src="NJR.jpg" alt="A special memory">
+        <div class="image-gallery">
+            <img src="in_seoul.jpg" alt="Exploring Seoul">
+            <img src="NJR.jpg" alt="A special memory">
+        </div>
+        <p class="memory-quote">"It is not the destination where you end up but the mishaps and memories you create
+            along the way." - Penelope Riley</p>
+        <iframe class="journey-map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d202405.92701130618!2d126.8474699639411!3d37.56468403676705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2012d5c39cf%3A0x7e11eca1405bf29b!2sSeoul%2C%20South%20Korea!5e0!3m2!1sen!2s!4v1625309098765!5m2!1sen!2s"
+                allowfullscreen="" loading="lazy"></iframe>
     </div>
 
     <footer>&copy; 2024 ZLP & NJR's Album. All rights reserved. 🌷</footer>
 </div>
 
-<!-- Nyan Cat Animation -->
 <img src="nyancat.gif" alt="Nyan Cat" class="nyan-cat" id="nyanCat">
 
+<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 <script>
-    // Nyan Cat movement and collision detection
-    const nyanCat = document.getElementById('nyanCat');
-    let dx = 2; // Change in x
-    let dy = 2; // Change in y
-    let catX = Math.random() * (window.innerWidth - 150); // Random initial x position
-    let catY = Math.random() * (window.innerHeight - 150); // Random initial y position
+    const nyanCat = $('#nyanCat');
+    let dx = 2;
+    let dy = 2;
+    let catX = Math.random() * ($(window).width() - 150);
+    let catY = Math.random() * ($(window).height() - 150);
 
     function updateNyanCatPosition() {
         catX += dx;
         catY += dy;
 
-        // Check for collision with window boundaries
-        if (catX + 150 > window.innerWidth || catX < 0) {
-            dx *= -1; // Reverse direction on x-axis
+        if (catX + 150 > $(window).width() || catX < 0) {
+            dx *= -1;
         }
-        if (catY + 150 > window.innerHeight || catY < 0) {
-            dy *= -1; // Reverse direction on y-axis
+        if (catY + 150 > $(window).height() || catY < 0) {
+            dy *= -1;
         }
 
-        // Update Nyan Cat position
-        nyanCat.style.left = `${catX}px`;
-        nyanCat.style.top = `${catY}px`;
-
+        nyanCat.css({left: catX + 'px', top: catY + 'px'});
         requestAnimationFrame(updateNyanCatPosition);
     }
 
-    // Start the Nyan Cat movement
     updateNyanCatPosition();
 
-    // Toggle rotation on click
     let isRotating = false;
-    nyanCat.addEventListener('click', function () {
+    nyanCat.on('click', function () {
         isRotating = !isRotating;
-        if (isRotating) {
-            this.classList.add('rotating');
-        } else {
-            this.classList.remove('rotating');
-        }
+        $(this).toggleClass('rotating', isRotating);
     });
 
-    // Responsive design for album entries
-    const albumEntries = document.querySelectorAll('.album-entry');
+    const albumEntries = $('.album-entry');
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
+                $(entry.target).css({opacity: 1, transform: 'translateY(0)'});
             }
         });
     }, {threshold: 0.1});
 
-    albumEntries.forEach(entry => {
-        entry.style.opacity = '0';
-        entry.style.transform = 'translateY(50px)';
-        entry.style.transition = 'opacity 0.5s, transform 0.5s';
-        observer.observe(entry);
+    albumEntries.each(function () {
+        $(this).css({opacity: 0, transform: 'translateY(50px)', transition: 'opacity 0.5s, transform 0.5s'});
+        observer.observe(this);
     });
 
-    // New love timer function
     function updateLoveTimer() {
         const startDate = new Date('2024-06-21T01:30:00');
         const now = new Date();
@@ -281,14 +343,36 @@
         const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
         const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
-        document.getElementById('timer').textContent =
-            `${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`;
+        $('#timer').text(`${days} days, ${hours} hours, ${minutes} minutes, ${seconds} seconds`);
     }
 
-    // Update the timer every second
     setInterval(updateLoveTimer, 1000);
-    updateLoveTimer(); // Initial call to display the timer immediately
+    updateLoveTimer();
+
+    function createHeart() {
+        const heart = $('<div>').addClass('heart').text('❤');
+        heart.css({
+            left: Math.random() * $(window).width() + 'px',
+            top: $(window).height() + 'px'
+        });
+        $('body').append(heart);
+        setTimeout(() => heart.remove(), 4000);
+    }
+
+    setInterval(createHeart, 300);
+
+    function celebrateLove() {
+        confetti({
+            particleCount: 100,
+            spread: 70,
+            origin: {y: 0.6}
+        });
+    }
+
+    $('.love-timer').on('click', celebrateLove);
+
+    // Trigger confetti every 30 seconds
+    setInterval(celebrateLove, 30000);
 </script>
 </body>
-
 </html>
