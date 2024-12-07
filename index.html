@@ -130,7 +130,7 @@
             margin: 20px 0;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
             position: relative;
             overflow: hidden;
         }
@@ -156,6 +156,7 @@
             transform: translateY(-15px) scale(1.02);
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
             backdrop-filter: blur(12px);
+            background-color: rgba(255, 255, 255, 0.25);
         }
 
         .album-entry:hover::before {
@@ -403,20 +404,20 @@
 <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
 <script>
     const nyanCat = $('#nyanCat');
-    let dx = 2;
-    let dy = 2;
+    const speed = 2;
+    let angle = Math.random() * 2 * Math.PI;
     let catX = Math.random() * ($(window).width() - 150);
     let catY = Math.random() * ($(window).height() - 150);
 
     function updateNyanCatPosition() {
-        catX += dx;
-        catY += dy;
+        catX += speed * Math.cos(angle);
+        catY += speed * Math.sin(angle);
 
         if (catX + 150 > $(window).width() || catX < 0) {
-            dx *= -1;
+            angle = Math.PI - angle;
         }
         if (catY + 150 > $(window).height() || catY < 0) {
-            dy *= -1;
+            angle = -angle;
         }
 
         nyanCat.css({left: catX + 'px', top: catY + 'px'});
