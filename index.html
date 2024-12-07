@@ -14,6 +14,8 @@
             --secondary-color: #4ecdc4;
             --background-color: #f7f7f7;
             --text-color: #333;
+            --glass-bg: rgba(255, 255, 255, 0.15);
+            --glass-border: rgba(255, 255, 255, 0.25);
         }
 
         html {
@@ -24,9 +26,14 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(135deg, #f0f8ff, #fae1dd);
+            background: linear-gradient(-45deg, 
+                #d4a5a5,
+                #a8e6cf,
+                #dcedc1,
+                #ffd3b6
+            );
             background-size: 400% 400%;
-            animation: backgroundAnimation 15s ease infinite;
+            animation: gradientBG 15s ease infinite;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -34,7 +41,7 @@
             color: #333;
         }
 
-        @keyframes backgroundAnimation {
+        @keyframes gradientBG {
             0% {
                 background-position: 0% 50%;
             }
@@ -52,15 +59,20 @@
             max-width: 900px;
             margin: 50px auto;
             padding: 20px;
-            background: rgba(255, 255, 255, 0.8);
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
             border-radius: 15px;
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
             animation: slideIn 1s ease-in-out;
         }
 
         h1 {
-            color: #ff6b6b;
-            font-size: 3em;
+            font-size: 4em;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 30px;
             animation: fadeIn 2s ease-in-out;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
         }
@@ -111,18 +123,43 @@
         }
 
         .album-entry {
-            background-color: #fff;
+            background: var(--glass-bg);
+            backdrop-filter: blur(8px);
+            border: 1px solid var(--glass-border);
             padding: 20px;
             margin: 20px 0;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .album-entry::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(
+                135deg,
+                rgba(255, 182, 193, 0.2),
+                rgba(168, 230, 207, 0.2)
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            z-index: -1;
         }
 
         .album-entry:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            background-color: #f0f8ff;
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(12px);
+        }
+
+        .album-entry:hover::before {
+            opacity: 1;
         }
 
         footer {
@@ -184,39 +221,53 @@
         }
 
         .love-timer {
-            background-color: #fff;
-            padding: 20px;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
             margin: 20px 0;
-            border-radius: 10px;
+            border-radius: 20px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
         }
 
         .love-timer:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
-            background-color: #f0f8ff;
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(12px);
         }
 
         .timer {
-            font-size: 1.2em;
+            font-size: 1.5em;
             font-weight: bold;
-            color: #ff6b6b;
+            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            padding: 10px;
             margin-top: 10px;
         }
 
         .image-gallery {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            padding: 20px;
             margin-bottom: 20px;
         }
 
         .image-gallery img {
-            width: 300px;
+            width: 100%;
             height: 400px;
             object-fit: cover;
+            border-radius: 15px;
+            transition: all 0.4s ease;
+            filter: brightness(0.9);
+        }
+
+        .image-gallery img:hover {
+            transform: scale(1.05);
+            filter: brightness(1.1);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
         }
 
         .heart {
@@ -225,6 +276,7 @@
             color: #ff6b6b;
             opacity: 0;
             animation: floatHeart 4s ease-in-out;
+            filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));
         }
 
         @keyframes floatHeart {
@@ -240,10 +292,17 @@
 
         .journey-map {
             width: 100%;
-            height: 200px;
+            height: 300px;
             border: none;
-            border-radius: 10px;
+            border-radius: 15px;
             margin-top: 20px;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .journey-map:hover {
+            transform: scale(1.02);
+            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.2);
         }
 
         #confetti-canvas {
@@ -254,6 +313,21 @@
             height: 100%;
             pointer-events: none;
             z-index: 1000;
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+                padding: 10px;
+            }
+
+            h1 {
+                font-size: 2.5em;
+            }
+
+            .image-gallery {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -388,10 +462,13 @@
     updateLoveTimer();
 
     function createHeart() {
-        const heart = $('<div>').addClass('heart').text('❤');
+        const heart = $('<div>').addClass('heart').html('❤️');
+        const size = Math.random() * 20 + 10;
         heart.css({
             left: Math.random() * $(window).width() + 'px',
-            top: $(window).height() + 'px'
+            top: $(window).height() + 'px',
+            fontSize: size + 'px',
+            transform: `rotate(${Math.random() * 360}deg)`
         });
         $('body').append(heart);
         setTimeout(() => heart.remove(), 4000);
@@ -411,6 +488,18 @@
 
     // Trigger confetti every 30 seconds
     setInterval(celebrateLove, 30000);
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.pageYOffset;
+        document.querySelector('.container').style.transform = `translateY(${scrolled * 0.1}px)`;
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        const x = e.clientX / window.innerWidth;
+        const y = e.clientY / window.innerHeight;
+        document.body.style.setProperty('--mouse-x', x);
+        document.body.style.setProperty('--mouse-y', y);
+    });
 </script>
 </body>
 </html>
