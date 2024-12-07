@@ -16,16 +16,34 @@
             --text-color: #333;
         }
 
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
             background: linear-gradient(135deg, #f0f8ff, #fae1dd);
+            background-size: 400% 400%;
+            animation: backgroundAnimation 15s ease infinite;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
             text-align: center;
             color: #333;
+        }
+
+        @keyframes backgroundAnimation {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
         }
 
         .container {
@@ -67,11 +85,29 @@
             border-radius: 15px;
             animation: fadeIn 3s ease-in-out;
             transition: transform 0.3s;
+            position: relative;
+        }
+
+        img::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 0.5) 100%);
+            border-radius: 15px;
+            opacity: 0;
+            transition: opacity 0.3s;
         }
 
         img:hover {
             transform: scale(1.05);
             box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+        }
+
+        img:hover::after {
+            opacity: 1;
         }
 
         .album-entry {
@@ -80,12 +116,13 @@
             margin: 20px 0;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
         }
 
         .album-entry:hover {
             transform: translateY(-10px);
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            background-color: #f0f8ff;
         }
 
         footer {
@@ -137,7 +174,8 @@
         }
 
         @keyframes bounce {
-            0%, 100% {
+            0%,
+            100% {
                 transform: translateY(0);
             }
             50% {
@@ -151,12 +189,13 @@
             margin: 20px 0;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
         }
 
         .love-timer:hover {
             transform: translateY(-10px);
             box-shadow: 0 0 20px rgba(0, 0, 0, 0.2);
+            background-color: #f0f8ff;
         }
 
         .timer {
@@ -199,12 +238,6 @@
             }
         }
 
-        .memory-quote {
-            font-style: italic;
-            color: #666;
-            margin: 10px 0;
-        }
-
         .journey-map {
             width: 100%;
             height: 200px;
@@ -240,18 +273,15 @@
         <h2>First Memory</h2>
         <p>The first time ever I saw your face, I saw the sun rise in your eyes, and the moon and stars were the
             gift you gave to the dark and empty skies.</p>
-        <img src="SHY.jpg" alt="A beautiful memory">
-        <p class="memory-quote">"Love at first sight is easy to understand; it's when two people have been looking at
-            each other for a lifetime that it becomes a miracle." - Sam Levenson</p>
+        <img src="photos/firstmemory/SHY.jpg">
     </div>
 
     <div class="album-entry">
         <h2>HONG KONG journey</h2>
         <div class="image-gallery">
-            <img src="Teeth.jpg" alt="A beautiful view of Hong Kong">
-            <img src="eye.jpg" alt="An eye-catching sight">
+            <img src="photos/hongkong/hongkong1.jpg">
+            <img src="photos/hongkong/hongkong2.jpg">
         </div>
-        <p class="memory-quote">"We travel not to escape life, but for life not to escape us." - Anonymous</p>
         <iframe class="journey-map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d236161.91654014084!2d114.0084042151371!3d22.35573121670782!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3403e2eda332980f%3A0xf08ab3badbeac97c!2sHong%20Kong!5e0!3m2!1sen!2s!4v1625308876452!5m2!1sen!2s"
                 allowfullscreen="" loading="lazy"></iframe>
@@ -260,11 +290,9 @@
     <div class="album-entry">
         <h2>Liao Ning journey</h2>
         <div class="image-gallery">
-            <img src="NOISE.jpg" alt="Vibrant moments in Liao Ning">
-            <img src="SEABRI.jpg" alt="A serene sea view">
+            <img src="photos/liaoning/liaoning1.jpg">
+            <img src="photos/liaoning/liaoning2.jpg">
         </div>
-        <p class="memory-quote">"The world is a book and those who do not travel read only one page." - St.
-            Augustine</p>
         <iframe class="journey-map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d5921373.996708418!2d118.27080754775716!3d41.29426075258454!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x35e8d0d7e1a1c1b1%3A0x5e3b4e7f0c064f2c!2sLiaoning%2C%20China!5e0!3m2!1sen!2s!4v1625308987654!5m2!1sen!2s"
                 allowfullscreen="" loading="lazy"></iframe>
@@ -273,13 +301,23 @@
     <div class="album-entry">
         <h2>Seoul journey</h2>
         <div class="image-gallery">
-            <img src="in_seoul.jpg" alt="Exploring Seoul">
-            <img src="NJR.jpg" alt="A special memory">
+            <img src="photos/seoul/seoul1.jpg">
+            <img src="photos/seoul/seoul2.jpg">
         </div>
-        <p class="memory-quote">"It is not the destination where you end up but the mishaps and memories you create
-            along the way." - Penelope Riley</p>
         <iframe class="journey-map"
                 src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d202405.92701130618!2d126.8474699639411!3d37.56468403676705!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357ca2012d5c39cf%3A0x7e11eca1405bf29b!2sSeoul%2C%20South%20Korea!5e0!3m2!1sen!2s!4v1625309098765!5m2!1sen!2s"
+                allowfullscreen="" loading="lazy"></iframe>
+    </div>
+
+
+    <div class="album-entry">
+        <h2>Busan journey</h2>
+        <div class="image-gallery">
+            <img src="photos/busan/busan1.jpg">
+            <img src="photos/busan/busan2.jpg">
+        </div>
+        <iframe class="journey-map"
+                src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d236161.91654014084!2d129.0754784!3d35.1795542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c22e1d58d7de1%3A0x540b8cc40f57f2d8!2sBusan!5e0!3m2!1sen!2s!4v1670492055911!5m2!1sen!2s"
                 allowfullscreen="" loading="lazy"></iframe>
     </div>
 
