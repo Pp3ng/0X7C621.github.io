@@ -70,10 +70,23 @@
             font-size: 4em;
             background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
             margin-bottom: 30px;
             animation: fadeIn 2s ease-in-out;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+            position: relative;
+            animation: titleGlow 3s ease-in-out infinite;
+        }
+
+        @keyframes titleGlow {
+            0%, 100% {
+                text-shadow: 0 0 30px rgba(255, 107, 107, 0.5);
+            }
+            50% {
+                text-shadow: 0 0 50px rgba(78, 205, 196, 0.8);
+            }
         }
 
         h2 {
@@ -248,7 +261,9 @@
             background-size: 200% auto;
             animation: shimmer 3s linear infinite;
             -webkit-background-clip: text;
+            background-clip: text;
             -webkit-text-fill-color: transparent;
+            text-fill-color: transparent;
         }
 
         @keyframes shimmer {
@@ -280,26 +295,6 @@
             box-shadow: 
                 0 15px 30px rgba(0, 0, 0, 0.2),
                 0 0 15px rgba(255, 255, 255, 0.2);
-        }
-
-        .heart {
-            position: fixed;
-            font-size: 20px;
-            color: #ff6b6b;
-            opacity: 0;
-            animation: floatHeart 4s ease-in-out;
-            filter: drop-shadow(0 0 10px rgba(255, 107, 107, 0.5));
-        }
-
-        @keyframes floatHeart {
-            0% {
-                transform: translateY(0);
-                opacity: 1;
-            }
-            100% {
-                transform: translateY(-100vh);
-                opacity: 0;
-            }
         }
 
         .journey-map {
@@ -379,6 +374,47 @@
         @keyframes float {
             0%, 100% { transform: translateY(0); }
             50% { transform: translateY(-20px); }
+        }
+        
+        .date-label {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(5px);
+            padding: 8px 15px;
+            border-radius: 20px;
+            font-size: 0.9em;
+            color: #333;
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+            opacity: 0;
+            transform: translateX(20px);
+            transition: all 0.3s ease;
+        }
+
+        .album-entry:hover .date-label {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .memory-description {
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.1),
+                rgba(255, 255, 255, 0.05)
+            );
+            padding: 15px;
+            border-radius: 10px;
+            margin: 15px 0;
+            transition: all 0.3s ease;
+        }
+
+        .memory-description:hover {
+            background: linear-gradient(
+                135deg,
+                rgba(255, 255, 255, 0.15),
+                rgba(255, 255, 255, 0.08)
+            );
         }
     </style>
 </head>
@@ -512,36 +548,6 @@
     setInterval(updateLoveTimer, 1000);
     updateLoveTimer();
 
-    function createHeart() {
-        const heart = $('<div>').addClass('heart').html('❤️');
-        const size = Math.random() * 20 + 10;
-        heart.css({
-            left: Math.random() * $(window).width() + 'px',
-            top: $(window).height() + 'px',
-            fontSize: size + 'px',
-            transform: `rotate(${Math.random() * 360}deg)`
-        });
-        $('body').append(heart);
-        setTimeout(() => heart.remove(), 4000);
-    }
-
-    setInterval(createHeart, 300);
-
-    function createFloatingText(e, element) {
-        const text = document.createElement('span');
-        text.className = 'floating-text';
-        text.innerHTML = '❤️';
-        text.style.left = (e.pageX - element.offsetLeft) + 'px';
-        text.style.top = (e.pageY - element.offsetTop) + 'px';
-        element.appendChild(text);
-        
-        setTimeout(() => text.remove(), 3000);
-    }
-
-    document.querySelectorAll('.album-entry').forEach(entry => {
-        entry.addEventListener('mousemove', (e) => createFloatingText(e, entry));
-    });
-
     function enhancedCelebration() {
         const colors = ['#ff6b6b', '#4ecdc4', '#ffbe76', '#ff7979'];
         
@@ -581,11 +587,20 @@
         document.querySelector('.container').style.transform = `translateY(${scrolled * 0.1}px)`;
     });
 
-    document.addEventListener('mousemove', (e) => {
-        const x = e.clientX / window.innerWidth;
-        const y = e.clientY / window.innerHeight;
-        document.body.style.setProperty('--mouse-x', x);
-        document.body.style.setProperty('--mouse-y', y);
+    document.querySelectorAll('.album-entry').forEach((entry, index) => {
+        const dates = [
+            '2023.02.02', // First Memory
+            '2024.07', // Hong Kong
+            '2024.08', // Liaoning
+            '2024.09', // Seoul
+            '2024.10'  // Busan
+        ];
+        
+        const dateLabel = document.createElement('div');
+        dateLabel.className = 'date-label';
+        dateLabel.textContent = dates[index];
+        entry.style.position = 'relative';
+        entry.appendChild(dateLabel);
     });
 </script>
 </body>
