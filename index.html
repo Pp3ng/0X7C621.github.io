@@ -26,11 +26,11 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background: linear-gradient(-45deg, 
-                #ffd6d6,
-                #e2f0cb,
-                #d4f0f0,
-                #ffd6e7
+            background: linear-gradient(-45deg,
+            #ffd6d6,
+            #e2f0cb,
+            #d4f0f0,
+            #ffd6e7
             );
             background-size: 400% 400%;
             animation: gradientBG 20s ease infinite;
@@ -72,7 +72,6 @@
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-fill-color: transparent;
             margin-bottom: 30px;
             animation: fadeIn 2s ease-in-out;
             text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
@@ -155,9 +154,9 @@
             right: 0;
             bottom: 0;
             background: linear-gradient(
-                135deg,
-                rgba(255, 182, 193, 0.2),
-                rgba(168, 230, 207, 0.2)
+                    135deg,
+                    rgba(255, 182, 193, 0.2),
+                    rgba(168, 230, 207, 0.2)
             );
             opacity: 0;
             transition: opacity 0.4s ease;
@@ -167,9 +166,8 @@
         .album-entry:hover {
             transform: translateY(-10px) scale(1.02);
             background: rgba(255, 255, 255, 0.15);
-            box-shadow: 
-                0 20px 40px rgba(0, 0, 0, 0.12),
-                0 0 20px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.12),
+            0 0 20px rgba(255, 255, 255, 0.2);
         }
 
         .album-entry:hover::before {
@@ -253,17 +251,16 @@
 
         .timer {
             font-size: 1.8em;
-            background: linear-gradient(45deg, 
-                #ff6b8b,
-                #4ecdc4,
-                #ff6b6b
+            background: linear-gradient(45deg,
+            #ff6b8b,
+            #4ecdc4,
+            #ff6b6b
             );
             background-size: 200% auto;
             animation: shimmer 3s linear infinite;
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
-            text-fill-color: transparent;
         }
 
         @keyframes shimmer {
@@ -292,9 +289,8 @@
         .image-gallery img:hover {
             transform: scale(1.05) translateY(-5px);
             filter: brightness(1.1) contrast(1.2);
-            box-shadow: 
-                0 15px 30px rgba(0, 0, 0, 0.2),
-                0 0 15px rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2),
+            0 0 15px rgba(255, 255, 255, 0.2);
         }
 
         .journey-map {
@@ -348,9 +344,9 @@
             left: -2px;
             right: -2px;
             bottom: -2px;
-            background: linear-gradient(45deg, 
-                rgba(255, 107, 107, 0.5), 
-                rgba(78, 205, 196, 0.5)
+            background: linear-gradient(45deg,
+            rgba(255, 107, 107, 0.5),
+            rgba(78, 205, 196, 0.5)
             );
             border-radius: 17px;
             z-index: -1;
@@ -372,10 +368,14 @@
         }
 
         @keyframes float {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-20px); }
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-20px);
+            }
         }
-        
+
         .date-label {
             position: absolute;
             top: 20px;
@@ -399,9 +399,9 @@
 
         .memory-description {
             background: linear-gradient(
-                135deg,
-                rgba(255, 255, 255, 0.1),
-                rgba(255, 255, 255, 0.05)
+                    135deg,
+                    rgba(255, 255, 255, 0.1),
+                    rgba(255, 255, 255, 0.05)
             );
             padding: 15px;
             border-radius: 10px;
@@ -411,10 +411,29 @@
 
         .memory-description:hover {
             background: linear-gradient(
-                135deg,
-                rgba(255, 255, 255, 0.15),
-                rgba(255, 255, 255, 0.08)
+                    135deg,
+                    rgba(255, 255, 255, 0.15),
+                    rgba(255, 255, 255, 0.08)
             );
+        }
+
+        .heart {
+            position: fixed;
+            font-size: 20px;
+            color: #ff6b6b;
+            opacity: 0;
+            animation: floatHeart 4s ease-in-out;
+        }
+
+        @keyframes floatHeart {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-100vh);
+                opacity: 0;
+            }
         }
     </style>
 </head>
@@ -548,39 +567,41 @@
     setInterval(updateLoveTimer, 1000);
     updateLoveTimer();
 
-    function enhancedCelebration() {
+    function celebration() {
         const colors = ['#ff6b6b', '#4ecdc4', '#ffbe76', '#ff7979'];
-        
+
         confetti({
             particleCount: 100,
             spread: 70,
-            origin: { y: 0.6 },
+            origin: {y: 0.6},
             colors: colors,
             shapes: ['circle', 'square'],
-            ticks: 200,
-            disableForReducedMotion: true
+            ticks: 200
         });
-        
+
         setTimeout(() => {
             confetti({
                 particleCount: 50,
                 angle: 60,
                 spread: 55,
-                origin: { x: 0 },
+                origin: {x: 0},
                 colors: colors
             });
-            
+
             confetti({
                 particleCount: 50,
                 angle: 120,
                 spread: 55,
-                origin: { x: 1 },
+                origin: {x: 1},
                 colors: colors
             });
         }, 250);
     }
 
-    $('.love-timer').on('click', enhancedCelebration);
+    $('.love-timer').on('click', celebration);
+    
+    // Trigger confetti every 30 seconds
+    setInterval(celebration, 30000);
 
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
@@ -590,18 +611,31 @@
     document.querySelectorAll('.album-entry').forEach((entry, index) => {
         const dates = [
             '2023.02.02', // First Memory
-            '2024.07', // Hong Kong
+            '2024.06', // Hong Kong
             '2024.08', // Liaoning
             '2024.09', // Seoul
-            '2024.10'  // Busan
+            '2024.11'  // Busan
         ];
-        
+
         const dateLabel = document.createElement('div');
         dateLabel.className = 'date-label';
         dateLabel.textContent = dates[index];
         entry.style.position = 'relative';
         entry.appendChild(dateLabel);
     });
+
+    function createHeart() {
+        const heart = $('<div>').addClass('heart').text('❤');
+        heart.css({
+            left: Math.random() * $(window).width() + 'px',
+            top: $(window).height() + 'px'
+        });
+        $('body').append(heart);
+        setTimeout(() => heart.remove(), 4000);
+    }
+
+    setInterval(createHeart, 300);
+
 </script>
 </body>
 </html>
