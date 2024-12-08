@@ -27,13 +27,13 @@
             margin: 0;
             padding: 0;
             background: linear-gradient(-45deg, 
-                #d4a5a5,
-                #a8e6cf,
-                #dcedc1,
-                #ffd3b6
+                #ffd6d6,
+                #e2f0cb,
+                #d4f0f0,
+                #ffd6e7
             );
             background-size: 400% 400%;
-            animation: gradientBG 15s ease infinite;
+            animation: gradientBG 20s ease infinite;
             display: flex;
             flex-direction: column;
             min-height: 100vh;
@@ -59,11 +59,10 @@
             max-width: 900px;
             margin: 50px auto;
             padding: 20px;
-            background: var(--glass-bg);
-            backdrop-filter: blur(12px);
-            border: 1px solid var(--glass-border);
-            border-radius: 15px;
-            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
             animation: slideIn 1s ease-in-out;
         }
 
@@ -123,14 +122,14 @@
         }
 
         .album-entry {
-            background: var(--glass-bg);
-            backdrop-filter: blur(8px);
-            border: 1px solid var(--glass-border);
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
             padding: 20px;
             margin: 20px 0;
             border-radius: 10px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s, background-color 0.3s;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
             position: relative;
             overflow: hidden;
         }
@@ -153,10 +152,11 @@
         }
 
         .album-entry:hover {
-            transform: translateY(-15px) scale(1.02);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
-            backdrop-filter: blur(12px);
-            background-color: rgba(255, 255, 255, 0.25);
+            transform: translateY(-10px) scale(1.02);
+            background: rgba(255, 255, 255, 0.15);
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.12),
+                0 0 20px rgba(255, 255, 255, 0.2);
         }
 
         .album-entry:hover::before {
@@ -239,13 +239,22 @@
         }
 
         .timer {
-            font-size: 1.5em;
-            font-weight: bold;
-            background: linear-gradient(45deg, #ff6b6b, #4ecdc4);
+            font-size: 1.8em;
+            background: linear-gradient(45deg, 
+                #ff6b8b,
+                #4ecdc4,
+                #ff6b6b
+            );
+            background-size: 200% auto;
+            animation: shimmer 3s linear infinite;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            padding: 10px;
-            margin-top: 10px;
+        }
+
+        @keyframes shimmer {
+            to {
+                background-position: 200% center;
+            }
         }
 
         .image-gallery {
@@ -261,14 +270,16 @@
             height: 400px;
             object-fit: cover;
             border-radius: 15px;
-            transition: all 0.4s ease;
-            filter: brightness(0.9);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            filter: brightness(0.95) contrast(1.1);
         }
 
         .image-gallery img:hover {
-            transform: scale(1.05);
-            filter: brightness(1.1);
-            box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
+            transform: scale(1.05) translateY(-5px);
+            filter: brightness(1.1) contrast(1.2);
+            box-shadow: 
+                0 15px 30px rgba(0, 0, 0, 0.2),
+                0 0 15px rgba(255, 255, 255, 0.2);
         }
 
         .heart {
@@ -329,6 +340,45 @@
             .image-gallery {
                 grid-template-columns: 1fr;
             }
+        }
+
+        .glow-effect {
+            position: relative;
+        }
+
+        .glow-effect::before {
+            content: '';
+            position: absolute;
+            top: -2px;
+            left: -2px;
+            right: -2px;
+            bottom: -2px;
+            background: linear-gradient(45deg, 
+                rgba(255, 107, 107, 0.5), 
+                rgba(78, 205, 196, 0.5)
+            );
+            border-radius: 17px;
+            z-index: -1;
+            filter: blur(10px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .glow-effect:hover::before {
+            opacity: 1;
+        }
+
+        .floating-text {
+            position: absolute;
+            font-size: 0.8em;
+            color: rgba(255, 255, 255, 0.8);
+            pointer-events: none;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
         }
     </style>
 </head>
@@ -477,18 +527,54 @@
 
     setInterval(createHeart, 300);
 
-    function celebrateLove() {
+    function createFloatingText(e, element) {
+        const text = document.createElement('span');
+        text.className = 'floating-text';
+        text.innerHTML = '❤️';
+        text.style.left = (e.pageX - element.offsetLeft) + 'px';
+        text.style.top = (e.pageY - element.offsetTop) + 'px';
+        element.appendChild(text);
+        
+        setTimeout(() => text.remove(), 3000);
+    }
+
+    document.querySelectorAll('.album-entry').forEach(entry => {
+        entry.addEventListener('mousemove', (e) => createFloatingText(e, entry));
+    });
+
+    function enhancedCelebration() {
+        const colors = ['#ff6b6b', '#4ecdc4', '#ffbe76', '#ff7979'];
+        
         confetti({
             particleCount: 100,
             spread: 70,
-            origin: {y: 0.6}
+            origin: { y: 0.6 },
+            colors: colors,
+            shapes: ['circle', 'square'],
+            ticks: 200,
+            disableForReducedMotion: true
         });
+        
+        setTimeout(() => {
+            confetti({
+                particleCount: 50,
+                angle: 60,
+                spread: 55,
+                origin: { x: 0 },
+                colors: colors
+            });
+            
+            confetti({
+                particleCount: 50,
+                angle: 120,
+                spread: 55,
+                origin: { x: 1 },
+                colors: colors
+            });
+        }, 250);
     }
 
-    $('.love-timer').on('click', celebrateLove);
-
-    // Trigger confetti every 30 seconds
-    setInterval(celebrateLove, 30000);
+    $('.love-timer').on('click', enhancedCelebration);
 
     window.addEventListener('scroll', () => {
         const scrolled = window.pageYOffset;
