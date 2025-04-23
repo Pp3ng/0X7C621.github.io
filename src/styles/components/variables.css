@@ -1,0 +1,44 @@
+/* CSS Variables */
+:root {
+  /* Colors */
+  --primary-color: #ff6b6b;
+  --secondary-color: #4ecdc4;
+  --background-color: #f7f7f7;
+  --text-color: #333;
+  --glass-bg: rgba(255, 255, 255, 0.15);
+  --glass-border: rgba(255, 255, 255, 0.25);
+
+  /* Gradients */
+  --gradient-bg: linear-gradient(-45deg, #ffd6d6, #e2f0cb, #d4f0f0, #ffd6e7);
+  --gradient-primary: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  --gradient-glass: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.15),
+    rgba(255, 255, 255, 0.08)
+  );
+
+  /* Shadows */
+  --shadow-sm: 0 5px 15px rgba(0, 0, 0, 0.1);
+  --shadow-md: 0 8px 32px 0 rgba(31, 38, 135, 0.15);
+  --shadow-lg: 0 20px 40px rgba(0, 0, 0, 0.15);
+
+  /* Fonts */
+  --font-main: "Quicksand", sans-serif;
+  --font-decorative: "Caveat", cursive;
+  --font-size-base: 16px;
+
+  /* Transitions */
+  --transition-fast: all 0.2s ease;
+  --transition-medium: all 0.3s ease;
+  --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  /* Border radius */
+  --radius-sm: 10px;
+  --radius-md: 15px;
+  --radius-lg: 20px;
+  --radius-round: 30px;
+}

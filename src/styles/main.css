@@ -1,0 +1,7 @@
+/* Import CSS Components */
+@import "./components/variables.css";
+@import "./components/base.css";
+@import "./components/header.css";
+@import "./components/components.css";
+@import "./components/animations.css";
+@import "./components/responsive.css";

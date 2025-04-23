@@ -1,0 +1,108 @@
+/* Header Styles */
+.site-header {
+  padding: 2rem 1rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.header-content {
+  position: relative;
+  z-index: 2;
+}
+
+.typewriter {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  height: auto;
+  min-height: 100px;
+}
+
+.typewriter h1 {
+  display: inline-block;
+  margin: 0 auto;
+  letter-spacing: 2px;
+  background: linear-gradient(
+    45deg,
+    var(--primary-color),
+    var(--secondary-color)
+  );
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  white-space: pre-wrap;
+  max-width: 80%;
+  font-size: clamp(2.5em, 5vw, 4em);
+  line-height: 1.3;
+  padding: 10px;
+  word-break: break-word;
+  position: relative;
+  font-weight: 700;
+  font-family: var(--font-decorative);
+  animation: titleGlow 3s ease-in-out infinite;
+}
+
+.header-title {
+  transition: transform 0.3s ease;
+  will-change: transform;
+}
+
+.header-decoration {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 2rem auto;
+  max-width: 500px;
+}
+
+.decoration-line {
+  height: 2px;
+  flex-grow: 1;
+  background: linear-gradient(
+    to var(--direction, right),
+    transparent,
+    var(--primary-color)
+  );
+}
+
+.decoration-line.left {
+  --direction: right;
+}
+
+.decoration-line.right {
+  --direction: left;
+}
+
+.decoration-icon {
+  font-size: 1.5rem;
+  margin: 0 1rem;
+  animation: pulse 2s infinite;
+}
+
+.cursor {
+  display: inline-block;
+  width: 3px;
+  height: 1.2em;
+  background-color: var(--primary-color);
+  margin-left: 2px;
+  vertical-align: text-top;
+  animation: blink 0.75s step-end infinite;
+}
+
+.cursor.done {
+  animation: fadeOut 0.5s forwards;
+}
+
+@keyframes popIn {
+  0% {
+    transform: scale(0);
+  }
+  70% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
