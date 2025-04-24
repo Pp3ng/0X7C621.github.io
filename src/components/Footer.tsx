@@ -4,7 +4,17 @@ const Footer: React.FC = () => {
   const year = new Date().getFullYear();
 
   return (
-    <footer>&copy; {year} ZLP & NJR's Album. All rights reserved. 🌷</footer>
+    <footer>
+      <div className="footer-content">
+        <div>&copy; {year} ZLP & NJR's Album. All rights reserved.</div>
+        <div>
+          Made with memories
+          <span className="flower">🌷</span>
+          <span className="flower">🌸</span>
+          <span className="flower">🌺</span>
+        </div>
+      </div>
+    </footer>
   );
 };
 

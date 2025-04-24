@@ -1,0 +1,21 @@
+/* Footer styles */
+footer {
+  padding: 20px 0;
+  text-align: center;
+  font-size: 14px;
+  color: #666;
+  margin-top: 30px;
+  width: 100%;
+}
+
+footer .footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: center;
+}
+
+footer .flower {
+  margin: 0 5px;
+  display: inline-block;
+}

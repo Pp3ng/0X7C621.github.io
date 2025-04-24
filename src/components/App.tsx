@@ -109,10 +109,9 @@ const App: React.FC = () => {
           mapUrl="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d236161.91654014084!2d129.0754784!3d35.1795542!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x357c22e1d58d7de1%3A0x540b8cc40f57f2d8!2sBusan!5e0!3m2!1sen!2s!4v1670492055911!5m2!1sen!2s"
           date="2024.11"
         />
-
-        <Footer />
       </div>
 
+      <Footer />
       <NyanCat />
     </>
   );
