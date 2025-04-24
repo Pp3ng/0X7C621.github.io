@@ -2,6 +2,10 @@
 @import "./components/variables.css";
 @import "./components/base.css";
 @import "./components/header.css";
-@import "./components/components.css";
 @import "./components/animations.css";
+@import "./components/album-entry.css";
+@import "./components/love-timer.css";
+@import "./components/nyan-cat.css";
+@import "./components/gallery.css";
+@import "./components/loader.css";
 @import "./components/responsive.css";

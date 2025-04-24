@@ -302,11 +302,7 @@ const LoveTimer: React.FC = () => {
       <div className="love-timer-decoration left"></div>
       <div className="love-timer-decoration right"></div>
 
-      <h2 className="timer-title">
-        <span className="timer-icon">❤️</span>
-        Our Love Timer
-        <span className="timer-icon">❤️</span>
-      </h2>
+      <h2 className="timer-title">Our Love Timer</h2>
 
       <div className="timer-container">
         <div className="time-block days-block">
@@ -336,9 +332,7 @@ const LoveTimer: React.FC = () => {
 
       <div className="milestone-message">
         <p className="current-milestone">
-          {milestoneData.daysPassed === 0
-            ? "Our journey begins today! ❤️"
-            : `We've been together for ${milestoneData.daysPassed} days!`}
+          {`We've been together for ${milestoneData.daysPassed} days!`}
         </p>
         <p className="next-milestone">
           {milestoneData.daysToNextMilestone > 0 &&

@@ -1,0 +1,89 @@
+/* Nyan Cat Component Styles */
+
+.nyan-cat {
+  position: fixed;
+  width: 150px;
+  height: auto;
+  z-index: 1001;
+  transition: var(--transition-medium);
+  filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
+  cursor: pointer;
+  transform-origin: center;
+  will-change: transform, filter;
+}
+
+.nyan-cat:hover {
+  filter: drop-shadow(0 0 15px rgba(255, 107, 107, 0.9));
+  transform: scale(1.1);
+}
+
+.nyan-cat:active {
+  transform: scale(0.95);
+}
+
+/* Rotation animation */
+.rotating {
+  animation: rotate 2s linear infinite;
+}
+
+/* Flying animation */
+.flying {
+  animation: fly-bounce 3s ease-in-out infinite;
+}
+
+.turbo-mode {
+  filter: drop-shadow(0 0 20px gold) brightness(1.2) contrast(1.1) !important;
+}
+
+/* Star effect */
+.star {
+  position: absolute;
+  background: white;
+  border-radius: 50%;
+  animation: twinkle 1s infinite alternate;
+  pointer-events: none;
+}
+
+/* Music note */
+.music-note {
+  position: absolute;
+  font-size: 20px;
+  color: rgba(255, 255, 255, 0.7);
+  animation: float-up 2s forwards;
+  pointer-events: none;
+}
+
+/* Flying bounce animation */
+@keyframes fly-bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+/* Star twinkling */
+@keyframes twinkle {
+  0% {
+    opacity: 0.3;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Note floating */
+@keyframes float-up {
+  0% {
+    transform: translate(0, 0) rotate(0deg);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(var(--x, 20px), -80px) rotate(var(--r, 20deg));
+    opacity: 0;
+  }
+}

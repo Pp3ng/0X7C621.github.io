@@ -1,0 +1,68 @@
+/* Album Entry Component Styles */
+
+.album-entry {
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 20px;
+  margin: 20px 0;
+  border-radius: var(--radius-md);
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-slow);
+  position: relative;
+  overflow: hidden;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+}
+
+.album-entry::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 182, 193, 0.2),
+    rgba(168, 230, 207, 0.2)
+  );
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  z-index: -1;
+}
+
+.album-entry:hover {
+  transform: translateY(-10px) rotateX(2deg) rotateY(2deg);
+  background: rgba(255, 255, 255, 0.15);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15),
+    0 0 30px rgba(255, 107, 107, 0.15);
+}
+
+.album-entry:hover::before {
+  opacity: 1;
+}
+
+.date-label {
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  padding: 8px 16px;
+  border-radius: 30px;
+  font-size: 0.95em;
+  font-weight: 600;
+  color: #333;
+  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+  opacity: 0;
+  transform: translateX(20px);
+  transition: all 0.4s ease;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.album-entry:hover .date-label {
+  opacity: 1;
+  transform: translateX(0);
+}

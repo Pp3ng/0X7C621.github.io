@@ -1,7 +1,10 @@
-import React, { useEffect,  useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 const Header: React.FC = () => {
   const titleRef = useRef<HTMLHeadingElement>(null);
+  const [catEmoji, setCatEmoji] = useState("🐱");
+  const [dogEmoji, setDogEmoji] = useState("🐶");
+
   useEffect(() => {
     const titleText = "Welcome to\nZLP & NJR's Album!";
 
@@ -29,9 +32,34 @@ const Header: React.FC = () => {
       type();
     }
 
-    return () => {
-    };
+    return () => {};
   }, []);
+
+  const catEmojis = ["🐱", "😺", "😸", "😻", "😽", "🙀", "😹"];
+
+  const dogEmojis = ["🐶", "🦮", "🐕‍🦺", "🐩", "🐕", "🦴", "🐾"];
+
+  const handleCatClick = () => {
+    const randomIndex = Math.floor(Math.random() * catEmojis.length);
+    setCatEmoji(catEmojis[randomIndex]);
+    playEmojiFx("cat");
+  };
+
+  const handleDogClick = () => {
+    const randomIndex = Math.floor(Math.random() * dogEmojis.length);
+    setDogEmoji(dogEmojis[randomIndex]);
+    playEmojiFx("dog");
+  };
+
+  const playEmojiFx = (type: string) => {
+    const emojiElement = document.querySelector(`.decoration-icon.${type}`);
+    if (emojiElement) {
+      emojiElement.classList.add("pulse-effect");
+      setTimeout(() => {
+        emojiElement.classList.remove("pulse-effect");
+      }, 500);
+    }
+  };
 
   return (
     <header className="site-header">
@@ -41,8 +69,20 @@ const Header: React.FC = () => {
         </div>
         <div className="header-decoration">
           <div className="decoration-line left"></div>
-          <span className="decoration-icon">🐱</span>
-          <span className="decoration-icon">🐶</span>
+          <span
+            className="decoration-icon cat"
+            onClick={handleCatClick}
+            title="Click me!"
+          >
+            {catEmoji}
+          </span>
+          <span
+            className="decoration-icon dog"
+            onClick={handleDogClick}
+            title="Click me too!"
+          >
+            {dogEmoji}
+          </span>
           <div className="decoration-line right"></div>
         </div>
       </div>

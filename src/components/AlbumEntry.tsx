@@ -41,7 +41,6 @@ const AlbumEntry: React.FC<AlbumEntryProps> = ({
     };
   }, []);
 
-  // 添加鼠标移动时的3D效果
   useEffect(() => {
     const handleMouseMove = (e: MouseEvent) => {
       if (entryRef.current) {

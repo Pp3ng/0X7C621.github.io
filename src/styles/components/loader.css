@@ -1,0 +1,75 @@
+/* Loader and Progress Styles */
+
+/* Confetti Canvas */
+#confetti-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1000;
+}
+
+/* Loader */
+.page-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(-45deg, #ffd6d6, #e2f0cb);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 2000;
+  transition: opacity 0.5s, visibility 0.5s;
+}
+
+.loader-heart {
+  font-size: 3.5em;
+  color: var(--primary-color);
+  animation: pulse 1s infinite;
+  margin-bottom: 15px;
+}
+
+.loader-text {
+  font-size: 1.2rem;
+  color: var(--text-color);
+  animation: fadeIn 1.5s ease-in-out;
+  letter-spacing: 2px;
+  font-family: var(--font-main);
+}
+
+.heart {
+  position: fixed;
+  font-size: 20px;
+  color: var(--primary-color);
+  opacity: 0;
+  animation: floatHeart 4s ease-in-out;
+  z-index: 2;
+}
+
+/* Scroll Progress */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  background: var(--gradient-primary);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  z-index: 1005;
+  transition: transform 0.1s ease;
+}
+
+.loaded {
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+/* Pulse effect for interactive elements */
+.pulse-effect {
+  animation: pulseScale 1s ease-in-out;
+}
